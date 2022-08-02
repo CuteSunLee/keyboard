@@ -1,6 +1,6 @@
 <template>
-  <div id="app">
-    <HelloWorld />
+  <div id="app" :class="[showBg ? 'show-bg' : '']">
+    <HelloWorld @show="changeBg"/>
   </div>
 </template>
 
@@ -12,26 +12,36 @@ export default {
   components: {
     HelloWorld
   },
+  data() {
+    return {
+      showBg: false
+    }
+  },
   methods: {
-    add() {
-      document.getElementsByClassName('demo1')[0].style.width = 400 + 'px';
-    },
-    sub() {
-      document.getElementsByClassName('demo1')[0].style.width = 200 + 'px';
+    changeBg() {
+      this.showBg = true;
     }
   }
 }
 </script>
 
 <style lang="less">
+html {
+  height: 100%;
+}
 body {
+  height: 100%;
   margin: 0;
 }
 #app {
   display: flex;
   justify-content: center;
+  height: 100%;
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  &.show-bg {
+    background: pink;
+  }
 }
 </style>

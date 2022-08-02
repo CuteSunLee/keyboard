@@ -70,8 +70,5 @@ export default {
         box-shadow: inset 0px 0px 2px #fff, 0px 2px 0px 0px #555, 0px 2px 3px #fff;;
         transform: translate(3px, 5px);
     }
-    .hidden {
-        display: none;
-    }
 }
 </style>

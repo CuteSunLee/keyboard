@@ -1,5 +1,6 @@
 <template>
   <div class="keyboard">
+    <h1 v-if="showTitle">情人节快乐</h1>
     <div class="text" :style="{color: currentColor}">当前色值：{{ currentColor || '你猜' }}</div>
     <div class="hello">
     <div class="line line-one">
@@ -29,7 +30,7 @@
     <audio class="audio"
         v-for="item in letter"
         :src="audioSrc[item]"
-        controls slot=""
+        controls
         :id="item"
         hidden="true">
     </audio>
@@ -90,6 +91,8 @@ export default {
         N:require("@/assets/N.mp3"),
         M:require("@/assets/M.mp3"),
       },
+      showTitle: false,
+      inputList: [],
       letter: LETTER,
       currentSrc: '',
       currentColor: '',
@@ -138,6 +141,11 @@ export default {
     const _this = this;
     window.addEventListener('keydown', function(e) {
         _this.currentKey = e.key;
+        _this.inputList.push(e.key);
+        if (_this.inputList.join("").includes('qrjkl')) {
+          _this.showTitle = true;
+          _this.$emit('show');
+        }
     });
     window.addEventListener('keyup', function(e) {
         _this.currentKey = '';
@@ -149,6 +157,13 @@ export default {
 <style lang="less">
 .keyboard {
   margin-top: 100px;
+  h1 {
+    position: absolute;
+    left: 50%;
+    top: 3%;
+    transform: translate(-50%);
+    color: #FFF;
+  }
   .text {
     font-size: 20px;
     font-weight: 800;
